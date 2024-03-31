@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/koleaby4/go-bookings/pkg/config"
 	"github.com/koleaby4/go-bookings/pkg/handlers"
 	"net/http"

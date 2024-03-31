@@ -27,7 +27,13 @@ func (repo *Repository) Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func (repo *Repository) About(w http.ResponseWriter, r *http.Request) {
-	data := models.TemplateData{Strings: map[string]string{"FirstName": "James", "LastName": "Bond"}}
-	data.Strings["remote_ip"] = repo.App.Session.Get(r.Context(), "remote_ip").(string)
+	data := models.TemplateData{Strings: map[string]string{}}
+
+	remoteIp := repo.App.Session.GetString(r.Context(), "remote_ip")
+	if remoteIp == "" {
+		repo.App.Session.Put(r.Context(), "remote_ip", r.RemoteAddr)
+		remoteIp = r.RemoteAddr
+	}
+	data.Strings["remote_ip"] = remoteIp
 	render.RenderTemplate(w, "about.html", &data)
 }

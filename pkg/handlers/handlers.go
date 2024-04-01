@@ -25,10 +25,7 @@ func (repo *Repository) Index(w http.ResponseWriter, r *http.Request) {
 	repo.App.Session.Put(r.Context(), "remote_ip", r.RemoteAddr)
 	render.RenderTemplate(w, "index.html", &models.TemplateData{})
 }
-func (repo *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	repo.App.Session.Put(r.Context(), "remote_ip", r.RemoteAddr)
-	render.RenderTemplate(w, "home.html", &models.TemplateData{})
-}
+
 func (repo *Repository) Majors(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "majors.html", &models.TemplateData{})
 }

@@ -21,9 +21,26 @@ func NewHandlers(r *Repository) {
 	Repo = r
 }
 
+func (repo *Repository) Index(w http.ResponseWriter, r *http.Request) {
+	repo.App.Session.Put(r.Context(), "remote_ip", r.RemoteAddr)
+	render.RenderTemplate(w, "index.html", &models.TemplateData{})
+}
 func (repo *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	repo.App.Session.Put(r.Context(), "remote_ip", r.RemoteAddr)
 	render.RenderTemplate(w, "home.html", &models.TemplateData{})
+}
+func (repo *Repository) Majors(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "majors.html", &models.TemplateData{})
+}
+
+func (repo *Repository) Generals(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "generals.html", &models.TemplateData{})
+}
+func (repo *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "reservation.html", &models.TemplateData{})
+}
+func (repo *Repository) MakeReservation(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "make-reservation.html", &models.TemplateData{})
 }
 
 func (repo *Repository) About(w http.ResponseWriter, r *http.Request) {

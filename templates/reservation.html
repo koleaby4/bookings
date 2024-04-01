@@ -1,0 +1,24 @@
+{{ template "base" .}}
+
+{{ define "title"}}
+<title>Reservation</title>
+{{ end }}
+
+
+{{ define "content"}}
+<div class="container">
+    <h1>Reservation</h1>
+    <h2>Search for availability</h2>
+    <form action="reservation.html" method="get">
+        <div class="mb-3">
+            <label for="start-date" class="form-label">Start date</label>
+            <input type="date" class="form-control" id="start-date" aria-describedby="start-date" required>
+        </div>
+        <div class="mb-3">
+            <label for="end-date" class="form-label">End date</label>
+            <input type="date" class="form-control" id="end-date" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Search for availability</button>
+    </form>
+</div>
+{{ end }}

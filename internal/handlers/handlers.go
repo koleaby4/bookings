@@ -57,7 +57,7 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 // Reservation renders the make a reservation page and displays form
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 	var emptyReservation models.Reservation
-	data := make(map[string]any)
+	data := make(map[string]interface{})
 	data["reservation"] = emptyReservation
 
 	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
@@ -84,11 +84,11 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	form := forms.New(r.PostForm)
 
 	form.Required("first_name", "last_name", "email")
-	form.MinLength("first_name", 3, r)
+	form.MinLength("first_name", 3)
 	form.IsEmail("email")
 
 	if !form.Valid() {
-		data := make(map[string]any)
+		data := make(map[string]interface{})
 		data["reservation"] = reservation
 		render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
 			Form: form,
@@ -162,7 +162,7 @@ func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) 
 
 	m.App.Session.Remove(r.Context(), "reservation")
 
-	data := make(map[string]any)
+	data := make(map[string]interface{})
 	data["reservation"] = reservation
 
 	render.RenderTemplate(w, r, "reservation-summary.page.tmpl", &models.TemplateData{
